@@ -10,6 +10,8 @@
 demo is written in Livewire, to be as Laravel / PHP as possible. State is
 saved to server, unlike many other ToDo demos.
 
+![screenshot](screenshot.png)
+
 ## Requirements
 
 - Git >= 2

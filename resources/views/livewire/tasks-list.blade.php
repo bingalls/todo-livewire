@@ -10,23 +10,16 @@
             <div class="overflow-hidden bg-white shadow-xs sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <div>
-                        <x-primary-button wire:click="openModal" type="button" class="mb-4">
-                            Add
-                        </x-primary-button>
-
-                        {{-- ToDo: search by project --}}
-                        {{-- <input wire:model.live.debounce="searchColumns.project" type="text" placeholder="search projects"
-                            class="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" /> --}}
-                    </div>
+                    {{-- ToDo: search by project --}}
+                    {{-- <input wire:model.live.debounce="searchColumns.project" type="text" placeholder="search projects"
+                        class="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" /> --}}
 
                     <div class="overflow-hidden overflow-x-auto mb-4 min-w-full align-middle sm:rounded-md">
                         <table class="min-w-full border divide-y divide-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 w-10 text-left bg-gray-50">
-                                    </th>
-                                    <th class="px-6 py-3 text-left bg-gray-50">
+                                    {{-- 2 *header* (only) columns for long label is more responsive --}}
+                                    <th colspan="2" class="px-6 py-3 w-10 text-right bg-gray-50">
                                         <span class="text-xs font-medium tracking-wider leading-4 text-gray-500 uppercase">Priority</span>
                                     </th>
                                     <th class="px-6 py-3 text-left bg-gray-50">
@@ -35,7 +28,8 @@
                                     <th class="px-6 py-3 text-left bg-gray-50">
                                         <span class="text-xs font-medium tracking-wider leading-4 text-gray-500 uppercase">Project</span>
                                     </th>
-                                    <th class="px-6 py-3 text-left bg-gray-50 w-56">
+                                    <th class="px-6 pt-2 text-center bg-gray-50 w-56">
+                                        <x-primary-button wire:click="openModal" type="button" class="mb-4">Add</x-primary-button>
                                     </th>
                                 </tr>
                             </thead>
