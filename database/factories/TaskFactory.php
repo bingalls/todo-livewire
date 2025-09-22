@@ -12,8 +12,8 @@ class TaskFactory extends Factory
             'position' => $this->faker->unique()->randomNumber(2),
             'taskname' => $this->faker->unique()->word(),
             'project' => $this->faker->randomElement([
-                'bug',
                 'feature',
+                'issue',
                 'onboarding',
                 'sprint1',
                 'upgrade',

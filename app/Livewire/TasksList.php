@@ -46,7 +46,7 @@ class TasksList extends Component
         $this->validate();
 
         if (is_null($this->task)) {
-            $position = Task::max('position') + 1;
+            $position = (int)Task::max('position') + 1;
             Task::create(array_merge($this->only('taskname', 'project'), ['position' => $position]));
         } else {
             $this->task->update($this->only('taskname', 'project'));
@@ -76,7 +76,7 @@ class TasksList extends Component
             $order = $item['order'] + (($this->currentPage - 1) * $this->perPage);
 
             if ($cat['position'] != $order) {
-                Task::where('id', $item['value'])->update(['position' => $order]);
+                Task::where('id', $item['value'])->update(['position' => (int)$order]);
             }
         }
     }
@@ -126,8 +126,8 @@ class TasksList extends Component
     protected function rules(): array
     {
         return [
-            'taskname' => ['required', 'string', 'min:3'],
-            'project' => ['nullable', 'string'],
+            'taskname' => ['required', 'string', 'min:3',],
+            'project' => ['nullable', 'string',],
         ];
     }
 }
