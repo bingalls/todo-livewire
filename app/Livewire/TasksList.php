@@ -2,34 +2,28 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Task;
-use Illuminate\Support\Str;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class TasksList extends Component
 {
     use WithPagination;
 
+    private int $currentPage = 1;
+    private int $perPage = 10;
+
     public ?Task $task = null;
-
-    public string $taskname = '';
-    public string $project = '';
-
     public Collection $tasks;
-
     public bool $showModal = false;
-
-    public array $active;
-
     public int $editedTaskId = 0;
-
-    public int $currentPage = 1;
-
-    public int $perPage = 10;
+    public string $project = '';
+    public string $taskname = '';
 
     public function openModal(): void
     {
@@ -38,7 +32,7 @@ class TasksList extends Component
 
     public function updatedName(): void
     {
-        $this->project = Str::project($this->taskname);
+        $this->project = Str::slug($this->taskname);
     }
 
     public function save(): void
@@ -62,13 +56,6 @@ class TasksList extends Component
         $this->reset('editedTaskId');
     }
 
-    public function toggleIsActive(int $taskId): void
-    {
-        Task::where('id', $taskId)->update([
-            'is_active' => $this->active[$taskId],
-        ]);
-    }
-
     public function updateOrder(array $list): void
     {
         foreach ($list as $item) {
@@ -76,7 +63,7 @@ class TasksList extends Component
             $order = $item['order'] + (($this->currentPage - 1) * $this->perPage);
 
             if ($cat['position'] != $order) {
-                Task::where('id', $item['value'])->update(['position' => (int)$order]);
+                $this->task->where('id', $item['value'])->update(['position' => (int)$order]);
             }
         }
     }
@@ -90,6 +77,7 @@ class TasksList extends Component
         $this->project = $this->task->project;
     }
 
+    /** @noinspection PhpUnused */
     public function deleteConfirm(string $method, $id = null): void
     {
         $this->dispatch('swal:confirm', [
@@ -114,15 +102,12 @@ class TasksList extends Component
         $this->currentPage = $tasks->currentPage();
         $this->tasks = collect($tasks->items());
 
-        $this->active = $this->tasks->mapWithKeys(
-            fn (Task $item) => [$item['id'] => (bool) $item['is_active']]
-        )->toArray();
-
         return view('livewire.tasks-list', [
             'links' => $links,
         ]);
     }
 
+    #[ArrayShape(['taskname' => 'string', 'project' => 'string',])]
     protected function rules(): array
     {
         return [

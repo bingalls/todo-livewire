@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('tasks', static function (Blueprint $table) {
             $table->id();
             $table->integer('position');
             $table->string('taskname');

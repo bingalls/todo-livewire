@@ -3,9 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use JetBrains\PhpStorm\ArrayShape;
 
 class TaskFactory extends Factory
 {
+    #[ArrayShape(['position' => 'int', 'taskname' => 'string', 'project' => 'string',])]
     public function definition(): array
     {
         return [
@@ -17,7 +19,7 @@ class TaskFactory extends Factory
                 'onboarding',
                 'sprint1',
                 'upgrade',
-            ])
+            ]),
         ];
     }
 }

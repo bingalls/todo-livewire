@@ -1,10 +1,7 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Todo-Livewire
 
-<p align="center">
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## Todo-Livewire
+![laravel.com](https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg)
+![license](https://img.shields.io/packagist/l/laravel/framework)
 
 `To Do` is the classic `Hello World` example for JavaScript frameworks. This
 demo is written in Livewire, to be as Laravel / PHP as possible. State is
@@ -35,6 +32,17 @@ php artisan serve
 open http://127.0.0.1:8000/     # MacOS to open in default browser
 ```
 
+## Tests
+
+```bash
+composer validate
+composer diagnose
+composer audit
+npm audit
+npm doctor
+markdownlint README.md
+```
+
 ## License & Credits
 
 `Todo-Livewire` is open-sourced software licensed under the
@@ -49,10 +57,3 @@ It is made possible with the hard work & licenses from the following contributor
 - Nuno Maduro
 - Povilas Korop
 - Taylor Otwell
-
-## To Do
-
-This demo is not intended for production.
-
-- Todo: Filter by project
-- Todo: add tests
