@@ -16,13 +16,19 @@ class TasksList extends Component
     use WithPagination;
 
     private int $currentPage = 1;
+
     private int $perPage = 10;
 
     public ?Task $task = null;
+
     public Collection $tasks;
+
     public bool $showModal = false;
+
     public int $editedTaskId = 0;
+
     public string $project = '';
+
     public string $taskname = '';
 
     public function openModal(): void
@@ -40,7 +46,7 @@ class TasksList extends Component
         $this->validate();
 
         if (is_null($this->task)) {
-            $position = (int)Task::max('position') + 1;
+            $position = (int) Task::max('position') + 1;
             Task::create(array_merge($this->only('taskname', 'project'), ['position' => $position]));
         } else {
             $this->task->update($this->only('taskname', 'project'));
@@ -63,7 +69,7 @@ class TasksList extends Component
             $order = $item['order'] + (($this->currentPage - 1) * $this->perPage);
 
             if ($cat['position'] != $order) {
-                $this->task->where('id', $item['value'])->update(['position' => (int)$order]);
+                $this->task->where('id', $item['value'])->update(['position' => (int) $order]);
             }
         }
     }
@@ -81,10 +87,10 @@ class TasksList extends Component
     public function deleteConfirm(string $method, $id = null): void
     {
         $this->dispatch('swal:confirm', [
-            'type'   => 'warning',
-            'title'  => 'Are you sure?',
-            'text'   => '',
-            'id'     => $id,
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' => '',
+            'id' => $id,
             'method' => $method,
         ]);
     }
@@ -107,12 +113,12 @@ class TasksList extends Component
         ]);
     }
 
-    #[ArrayShape(['taskname' => 'string', 'project' => 'string',])]
+    #[ArrayShape(['taskname' => 'string', 'project' => 'string'])]
     protected function rules(): array
     {
         return [
-            'taskname' => ['required', 'string', 'min:3',],
-            'project' => ['nullable', 'string',],
+            'taskname' => ['required', 'string', 'min:3'],
+            'project' => ['nullable', 'string'],
         ];
     }
 }

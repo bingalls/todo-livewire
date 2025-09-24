@@ -41,6 +41,8 @@ composer audit
 npm audit
 npm doctor
 markdownlint README.md
+./vendor/bin/pint --test
+./vendor/bin/pest
 ```
 
 ## License & Credits

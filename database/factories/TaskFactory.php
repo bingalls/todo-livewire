@@ -7,7 +7,7 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class TaskFactory extends Factory
 {
-    #[ArrayShape(['position' => 'int', 'taskname' => 'string', 'project' => 'string',])]
+    #[ArrayShape(['position' => 'int', 'taskname' => 'string', 'project' => 'string'])]
     public function definition(): array
     {
         return [
