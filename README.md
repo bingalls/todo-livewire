@@ -43,6 +43,7 @@ npm doctor
 markdownlint README.md
 ./vendor/bin/pint --test
 ./vendor/bin/pest
+./vendor/bin/phpstan analyse
 ```
 
 ## License & Credits

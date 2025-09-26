@@ -18,6 +18,8 @@
     "require-dev": {
         "calebdw/larastan-livewire": "^2.3",
         "fakerphp/faker": "^1.24",
+        "jetbrains/phpstorm-attributes": "^1.2",
+        "larastan/larastan": "^3.7",
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.2",
         "laravel/pint": "^1.25",

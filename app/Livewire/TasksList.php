@@ -21,6 +21,7 @@ class TasksList extends Component
 
     public ?Task $task = null;
 
+    /** @var Collection<int, Task> */
     public Collection $tasks;
 
     public bool $showModal = false;
@@ -62,14 +63,17 @@ class TasksList extends Component
         $this->reset('editedTaskId');
     }
 
+    /**
+     * @param array<array{'value': int, 'order': int}> $list
+     */
     public function updateOrder(array $list): void
     {
         foreach ($list as $item) {
             $cat = $this->tasks->firstWhere('id', $item['value']);
-            $order = $item['order'] + (($this->currentPage - 1) * $this->perPage);
+            $order = (int)($item['order'] + (($this->currentPage - 1) * $this->perPage));
 
-            if ($cat['position'] != $order) {
-                $this->task->where('id', $item['value'])->update(['position' => (int) $order]);
+            if ((int)($cat['position']) !== $order) {
+                Task::where('id', $item['value'])->update(['position' => $order]);
             }
         }
     }
@@ -84,7 +88,7 @@ class TasksList extends Component
     }
 
     /** @noinspection PhpUnused */
-    public function deleteConfirm(string $method, $id = null): void
+    public function deleteConfirm(string $method, int $id = 0): void
     {
         $this->dispatch('swal:confirm', [
             'type' => 'warning',
@@ -113,12 +117,15 @@ class TasksList extends Component
         ]);
     }
 
+    /**
+     * @return string[]
+     */
     #[ArrayShape(['taskname' => 'string', 'project' => 'string'])]
     protected function rules(): array
     {
         return [
-            'taskname' => ['required', 'string', 'min:3'],
-            'project' => ['nullable', 'string'],
+            'taskname' => 'required|string|min:3',
+            'project' => 'nullable|string',
         ];
     }
 }

@@ -1,0 +1,28 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+
+    # Level 10 is the highest level
+    level: 7
+
+#    ignoreErrors:
+#        - '#PHPDoc tag @var#'
+#
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php
+
+# todo in the future, revisit ` composer require --dev phpat/phpat `
+#    phpat:
+#        ignore_built_in_classes: true
+
+# services:
+#    -
+#        class: Tests\Architecture\MyFirstTest
+#        tags:
+#            - phpat.test
+
