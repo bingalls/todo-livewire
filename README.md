@@ -34,16 +34,19 @@ open http://127.0.0.1:8000/     # MacOS to open in default browser
 
 ## Tests
 
+These tests are suitable for your ci/cd
+
 ```bash
 composer validate
 composer diagnose
 composer audit
 npm audit
 npm doctor
-markdownlint README.md
+# markdownlint README.md    # tool not included
 ./vendor/bin/pint --test
-./vendor/bin/pest
 ./vendor/bin/phpstan analyse
+./vendor/bin/pest
+./vendor/bin/phpinsights
 ```
 
 ## License & Credits

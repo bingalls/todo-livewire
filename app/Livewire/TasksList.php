@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Models\Task;
@@ -11,13 +13,9 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class TasksList extends Component
+final class TasksList extends Component
 {
     use WithPagination;
-
-    private int $currentPage = 1;
-
-    private int $perPage = 10;
 
     public ?Task $task = null;
 
@@ -26,11 +24,18 @@ class TasksList extends Component
 
     public bool $showModal = false;
 
+    /** @SuppressWarnings public for LiveWire */
     public int $editedTaskId = 0;
 
+    /** @SuppressWarnings public for LiveWire */
     public string $project = '';
 
+    /** @SuppressWarnings public for LiveWire */
     public string $taskname = '';
+
+    private int $currentPage = 1;
+
+    private int $perPage = 10;
 
     public function openModal(): void
     {
@@ -64,15 +69,15 @@ class TasksList extends Component
     }
 
     /**
-     * @param array<array{'value': int, 'order': int}> $list
+     * @param  array<array{'value': int, 'order': int}>  $list
      */
     public function updateOrder(array $list): void
     {
         foreach ($list as $item) {
             $cat = $this->tasks->firstWhere('id', $item['value']);
-            $order = (int)($item['order'] + (($this->currentPage - 1) * $this->perPage));
+            $order = (int) ($item['order'] + (($this->currentPage - 1) * $this->perPage));
 
-            if ((int)($cat['position']) !== $order) {
+            if ((int) ($cat['position']) !== $order) {
                 Task::where('id', $item['value'])->update(['position' => $order]);
             }
         }
@@ -118,7 +123,7 @@ class TasksList extends Component
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     #[ArrayShape(['taskname' => 'string', 'project' => 'string'])]
     protected function rules(): array

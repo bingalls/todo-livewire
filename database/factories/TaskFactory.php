@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -12,7 +14,7 @@ class TaskFactory extends Factory
     {
         return [
             'position' => $this->faker->unique()->randomNumber(2),
-            'taskname' => $this->faker->unique()->word(),
+            'taskname' => $this->faker->unique()->words(3, true),
             'project' => $this->faker->randomElement([
                 'feature',
                 'issue',
